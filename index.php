@@ -27,7 +27,15 @@ $title = "НАЗВАНИЕ САЙТА";
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                АВТОРИЗАЦИЯ ЗДЕСЬ
+                <li class="nav-item ml-1">
+                    <span class="align-middle">Гость</span class="align-middle">
+                </li>
+                <li class="nav-item ml-1">
+                    <a href="/login.php" class="align-middle btn-link">Войти</a>
+                </li>
+                <li class="nav-item ml-1">
+                    <a href="/login.php?registration" class="align-middle btn-link">Зарегистрироваться</a>
+                </li>
             </ul>
         </div>
     </nav>
