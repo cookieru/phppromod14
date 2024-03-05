@@ -1,5 +1,10 @@
 <?php
 $title = "НАЗВАНИЕ САЙТА";
+include_once "SPAengine/methods.php";
+session_start();
+
+$current_user = getCurrentUser();
+
 ?>
 
 <!DOCTYPE html>
@@ -27,15 +32,25 @@ $title = "НАЗВАНИЕ САЙТА";
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ml-1">
-                    <span class="align-middle">Гость</span class="align-middle">
-                </li>
-                <li class="nav-item ml-1">
-                    <a href="/login.php" class="align-middle btn-link">Войти</a>
-                </li>
-                <li class="nav-item ml-1">
-                    <a href="/login.php?registration" class="align-middle btn-link">Зарегистрироваться</a>
-                </li>
+                <?php
+                if ($current_user === null) { ?>
+                    <li class="nav-item ml-1">
+                        <span class="align-middle">Гость</span class="align-middle">
+                    </li>
+                    <li class="nav-item ml-1">
+                        <a href="/login.php" class="align-middle btn-link">Войти</a>
+                    </li>
+                    <li class="nav-item ml-1">
+                        <a href="/login.php?registration" class="align-middle btn-link">Зарегистрироваться</a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item ml-1">
+                        <span class="align-middle"><?= $current_user ?></span class="align-middle">
+                    </li>
+                    <li class="nav-item ml-1">
+                        (<a href="/login.php?logout" class="align-middle btn-link">Выйти</a>)
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </nav>

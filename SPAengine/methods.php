@@ -2,7 +2,7 @@
 //функция getUsersList() возвращает массив всех пользователей и хэшей их паролей;
 function getUserList()
 {
-    $json_userlist = file_get_contents("data/secrets.json");
+    $json_userlist = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/SPAengine/data/secrets.json");
     if ($json_userlist) {
         return json_decode($json_userlist, true);
     } else {
@@ -35,7 +35,7 @@ function checkPassword($login, $password)
 
     if (isset($userlist[$login])) {
         $pass_hash = sha1($password);
-        return($pass_hash == $userlist[$login]["password"]);
+        return($pass_hash === $userlist[$login]["password"]);
     }
 
     return false;
@@ -52,3 +52,15 @@ function getCurrentUser()
     return null;
 }
 //var_dump(getCurrentUser());
+
+// Регистрация новых клиентов
+function addUser($login, $password, $birthday)
+{
+    $userList = getUserList();
+    
+    $user = ["password" => sha1($password), "birthday" => strtotime($birthday)];
+    $userList[$login] = $user;
+
+    $json_out = json_encode($userList);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/SPAengine/data/secrets.json", $json_out);
+}

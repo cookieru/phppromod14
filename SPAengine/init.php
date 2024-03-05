@@ -8,5 +8,5 @@ if ($enableInit) {
     $userlist["nastya"] = $user;
 
     $json_out = json_encode($userlist);
-    file_put_contents("data/secrets.json", $json_out);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/SPAengine/data/secrets.json", $json_out);
 }
