@@ -1,6 +1,8 @@
 <?php
 $title = "НАЗВАНИЕ САЙТА";
-include_once "SPAengine/methods.php";
+include_once "SPAengine/authMethods.php";
+include_once "SPAengine/services.php";
+
 session_start();
 
 $current_user = getCurrentUser();
@@ -45,7 +47,9 @@ $current_user = getCurrentUser();
                     </li>
                 <?php } else { ?>
                     <li class="nav-item ml-1">
-                        <span class="align-middle"><?= $current_user ?></span class="align-middle">
+                        <span class="align-middle">
+                            <?= $current_user ?>
+                        </span class="align-middle">
                     </li>
                     <li class="nav-item ml-1">
                         (<a href="/login.php?logout" class="align-middle btn-link">Выйти</a>)
@@ -62,49 +66,41 @@ $current_user = getCurrentUser();
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h2>Услуги</h2>
-                <ul>
-                    <li>Массаж</li>
-                    <li>SPA-процедуры</li>
-                    <li>Косметические процедуры</li>
-                </ul>
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-lg-5 col-12 order-lg-last">
                 <h2>Акции</h2>
-                <ul>
-                    <li>Массаж</li>
-                    <li>SPA-процедуры</li>
-                    <li>Косметические процедуры</li>
-                </ul>
+
+            </div>
+            <div class="col-lg-7 col-12">
+                <h2>Услуги</h2>
+                <?php displayAvailableServices() ?>
             </div>
         </div>
     </div>
 
     <footer class="container">
-        <div class="row">
-            <div class="col-4 text-center">
-                <p>Адрес: ул. Примерная, 1</p>
+        <h3>Контакты</h1>
+            <div class="row">
+                <div class="col-md-4 col-12 text-center">
+                    <p>Адрес: ул. Примерная, 1</p>
+                </div>
+                <div class="col-md-4 col-12 text-center">
+                    <p>Телефон: <a href="tel:123-456-789">123-456-789</a></p>
+                </div>
+                <div class="col-md-4 col-12 text-center">
+                    <p>Email: <a href="mailto:info@spa-salon.ru">info@spa-salon.ru</a></p>
+                </div>
             </div>
-            <div class="col-4 text-center">
-                <p>Телефон: <a href="tel:123-456-789">123-456-789</a></p>
-            </div>
-            <div class="col-4 text-center">
-                <p>Email: <a href="mailto:info@spa-salon.ru">info@spa-salon.ru</a></p>
-            </div>
-        </div>
-        </div>
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-            integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

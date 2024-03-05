@@ -1,6 +1,6 @@
 <?php
 $title = "НАЗВАНИЕ САЙТА";
-include_once "SPAengine/methods.php";
+include_once "SPAengine/authMethods.php";
 session_start();
 
 $login_error_nologin = false;
