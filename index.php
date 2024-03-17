@@ -2,6 +2,7 @@
 $title = "НАЗВАНИЕ САЙТА";
 include_once "SPAengine/authMethods.php";
 include_once "SPAengine/services.php";
+include_once "SPAengine/promo.php";
 
 session_start();
 
@@ -68,6 +69,7 @@ $current_user = getCurrentUser();
         <div class="row">
             <div class="col-lg-5 col-12 order-lg-last">
                 <h2>Акции</h2>
+                <?php displayAvailablePromo() ?>
 
             </div>
             <div class="col-lg-7 col-12">
