@@ -1,4 +1,7 @@
 <?php
+
+include_once $_SERVER["DOCUMENT_ROOT"] . "/SPAengine/promo.php";
+
 //функция getUsersList() возвращает массив всех пользователей и хэшей их паролей;
 function getUserList()
 {
@@ -12,7 +15,6 @@ function getUserList()
         throw new Exception("Не удалось загрузить данные пользователей");
     }
 }
-//var_dump(getUserList());
 
 //функция existsUser($login) проверяет, существует ли пользователь с указанным логином;
 function existsUser($login)
@@ -24,8 +26,6 @@ function existsUser($login)
 
     return false;
 }
-//var_dump(existsUser("cookieru"));
-//var_dump(existsUser("cookie"));
 
 //функция checkPassword($login, $password) пусть возвращает true тогда, когда существует 
 //пользователь с указанным логином и введенный им пароль прошел проверку, иначе — false;
@@ -40,8 +40,6 @@ function checkPassword($login, $password)
 
     return false;
 }
-//var_dump(checkPassword("cookieru", "123456"));
-//var_dump(checkPassword("cookieru", "654321"));
 
 //функция getCurrentUser() которая возвращает либо имя вошедшего на сайт пользователя, либо null.
 function getCurrentUser()
@@ -51,7 +49,6 @@ function getCurrentUser()
 
     return null;
 }
-//var_dump(getCurrentUser());
 
 // Регистрация новых клиентов
 function addUser($login, $password, $birthday)
@@ -63,4 +60,22 @@ function addUser($login, $password, $birthday)
 
     $json_out = json_encode($userList);
     file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/SPAengine/data/secrets.json", $json_out);
+}
+
+function setCurrentUser($login)
+{
+    if (isset($login))
+    {
+        $_SESSION["current_user"] = $login;
+        $_SESSION["current_user_data"] = getUserList()[$login];
+
+        foreach ($GLOBALS["service_handlers"] as $service_handler)
+        {
+            if (isset($service_handler["onlogin"])) $service_handler["onlogin"]();
+        }
+    }
+    else
+    {
+        $_SESSION = array();
+    }
 }

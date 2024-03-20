@@ -17,6 +17,16 @@ function displayAvailableServices()
     $services = getAllServices();
     $curentUser = getCurrentUser();
 
+    $price_multiplier = 1;
+
+    foreach ($GLOBALS["service_handlers"] as $service_handler) {
+        if (isset ($service_handler["price_multiplier"])) {
+            $cur_mult = $service_handler["price_multiplier"]();
+            if ($cur_mult < $price_multiplier)
+                $price_multiplier = $cur_mult;
+        }
+    }
+
     foreach ($services as $service) {
         ?>
         <div class="row service-item">
@@ -29,7 +39,14 @@ function displayAvailableServices()
                     <?= $service["description"] ?>
                 </p>
                 <p class="service-price text-right">
-                    <?= $service["price"] ?>
+                    <?php if ($price_multiplier < 1) { ?>
+                        <s>
+                            <?= number_format($service["price"], 2, ",", " ") ?>
+                        </s>&nbsp
+                    <?php } ?>
+                    <b>
+                        <?= number_format($service["price"] * $price_multiplier, 2, ",", " ") ?>
+                    </b>
                 </p>
             </div>
         </div>

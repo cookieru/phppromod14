@@ -1,5 +1,5 @@
 <?php
-$title = "НАЗВАНИЕ САЙТА";
+$title = "СПА-САЛОН";
 include_once "SPAengine/authMethods.php";
 session_start();
 
@@ -38,7 +38,7 @@ if (isset($_POST["action"])) {
 
                 if (!$login_invalid) {
                     if (checkPassword($login, $password)) {
-                        $_SESSION["current_user"] = $login;
+                        setCurrentUser($login);
                     } else
                         $login_error_incorrect = true;
                 }
@@ -73,7 +73,7 @@ if (isset($_POST["action"])) {
 
                 if ($can_continue) {
                     addUser($login, $password, $birthday);
-                    $_SESSION["current_user"] = $login;
+                    setCurrentUser($login);
                 }
             }
             break;

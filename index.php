@@ -1,5 +1,5 @@
 <?php
-$title = "НАЗВАНИЕ САЙТА";
+$title = "СПА-САЛОН";
 include_once "SPAengine/authMethods.php";
 include_once "SPAengine/services.php";
 include_once "SPAengine/promo.php";
